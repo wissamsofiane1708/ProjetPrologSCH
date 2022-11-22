@@ -140,5 +140,5 @@ interrogeCritere(Carac, Reponse):-
 ecrireListe([]).
 ecrireListe([T|Q]):-write('\t'), writeln(T), ecrireListe(Q).
 
-:-consult('connaissances.pl').
+:-consult('connaissancesIA.pl').
 
