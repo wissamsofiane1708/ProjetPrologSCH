@@ -107,7 +107,10 @@ trouveObjet:-
 	trouveObjet(ListeCandidats, ListeCaracPossible).
 	
 trouveObjet([], []):- 
-	nl,nl,write('Tous les crit�res ont �t� examin�s, il n''y a aucun candidat possible, il faut r�viser les contraintes ou enrichir la base avec de nouveaux objets'), !.
+	nl,nl,write('Tous les crit�res ont �t� examin�s, il n''y a aucun candidat possible, veuillez proposer une chanson'), !,
+	read(Reponse),
+	declareObjet(Reponse),
+	definirObjet(Reponse).
 
 trouveObjet(ListeCandidats, []):-
 	nl,nl,write('Tous les crit�res ont �t� examin�s, la liste des candidats possibles est :'),nl,ecrireListe(ListeCandidats),!.
