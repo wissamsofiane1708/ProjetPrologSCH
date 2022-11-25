@@ -1,14 +1,4 @@
-%_____________________________________________________________________%
-%                                                                     %
-% Fichier : se.pl                                                     %
-%                                                                     %
-% Elements de travail pour la definition d'un systeme expert simple   %
-%                                                                     %
-% Pierre-Alexandre Favier - ENSC - IPB                                %
-%                                                                     %
-% 07/09/20                                                            %
-%                                                                     %
-%_____________________________________________________________________%
+
 
 % le fait objet a 1 argument est dynamique
 :-dynamic(objet/1).
@@ -80,6 +70,13 @@ afficheListeCaracteristique(Nom, [Carac-Valeur|Q]):-
 	write('La r�ponse � la question :'), nl, write('        '), write(Question),nl,
 	write('est '), write(Valeur), write(' pour '),write(Nom),nl,
 	afficheListeCaracteristique(Nom, Q).
+pce_image_view(Filename) :-
+    new(I, image(Filename)),
+    !,
+    new(B, bitmap(I)),
+    new(P, picture),
+    send(P, display, B),
+    send(P, open).
 
 definirObjet(Objet):-
 	findall(Carac, caracteristique(Objet, Carac,_), ListeCaracConnue),
@@ -101,7 +98,7 @@ definirObjet(Objet,ListeCaracConnue, [Carac|Q]) :-
 
 trouveObjet:-
 	% liste des objets possibles
-	pce_image_view('C:/Users/wsofiane/Downloads/prolog/ProjetPrologSCH/16Personnalite.png'),
+	pce_image_view('C:/Users/wsofiane/Desktop/ProjetPrologSCH/16Personnalite.jpeg'),
 	listeObjet(ListeCandidats),
 	% liste des caract�ristiques connues
 	listeCaracteristique(ListeCaracPossible),
@@ -145,25 +142,8 @@ interrogeCritere(Carac, Reponse):-
 ecrireListe([]).
 ecrireListe([T|Q]):-write('\t'), writeln(T), ecrireListe(Q).
 
-pce_image_view(Filename) :-
-    new(I, image(Filename)),
-    !,
-    new(B, bitmap(I)),
-    new(P, picture),
-    send(P, display, B),
-    send(P, open).
 
-mon_premier_program :-
-    % on crée la fenêtre
-    new(D, window('Ma première fenêtre')),
-    % on lui donne la bonne taille
-    send(D, size, size(250, 100)),
-    % on crée un composant texte
-    new(T, text('Hello World !')),
-    % on demande à la fenêtre de l'afficher à peu près au milieu
-    send(D, display, T, point(80, 40)),
-    % on envoie à la fenêtre le message d'affichage.
-    send(D, open).
+
 	
 :-consult('connaissancesIA.pl').
 
